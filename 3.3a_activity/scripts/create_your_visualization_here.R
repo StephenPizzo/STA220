@@ -124,3 +124,21 @@ summary(bike_crashes)
 
 
 # Your Figure ------------------------------------------------------------------------------------
+# fct_infreq() puts the most common level first (3.2). Here that orders the colours light to dark,
+# and the last level (serious or fatal) sits against the axis, where it is easiest to compare.
+fig_09 <- ggplot(bike_crashes, aes(y = corridor, fill = fct_infreq(crash_type))) +
+  geom_bar(position = "fill") +
+  scale_fill_manual(values = severity_colours) +
+  labs(
+    title = "Bike Crashes in Market Street by severity",
+    subtitle = "Worst Bike crashes per street in Market Street",
+    x = "Share of the section's crashes (1 is all of them)",
+    y = NULL,
+    fill = "crash_type",
+    caption = "Made-up data for practice. Market Street does not exist."
+  ) +
+  theme_minimal()
+
+fig_09
+
+ggsave("output/figures/example_09_severity.png", fig_09, width = 7.5, height = 4.5, bg = "white")
